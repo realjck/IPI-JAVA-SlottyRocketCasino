@@ -1,10 +1,5 @@
 package com.jck.exo.view;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Scanner;
-
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class SlotMachineView {
@@ -41,8 +36,12 @@ public class SlotMachineView {
     private void printLine(String text, String colors){
         int counter = 0;
         StringBuilder lineStr = new StringBuilder();
+        char color = 'W';
         for(char c : text.toCharArray()){
-            char color = colors.toUpperCase().charAt(counter);
+            try {
+                color = colors.toUpperCase().charAt(counter);
+            } catch (Exception ignored){}
+
             switch (color){
                 case 'R' : lineStr.append(RED); break;
                 case 'G' : lineStr.append(GREEN); break;
@@ -85,5 +84,13 @@ public class SlotMachineView {
         infoLine.append("#").append(nbplay +1).append(" #");
         printLine(infoLine.toString(), "P_Y_WWWWWWWWWWWWWWWWWWW_P");
         printLine("@***********************@", "GBBBBBBBBBBBBBBBBBBBBBBBG");
+    }
+
+    /**
+     * Affiche les gains du dernier tirage
+     * @param gains int gains à afficher
+     */
+    public void showWon(int gains){
+        printLine("VOUS AVEZ GAGNE C:"+gains, "CGCGCGCGCGCGCGCGY_W");
     }
 }

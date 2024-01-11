@@ -20,6 +20,7 @@ public class User {
     }
 
     public void removeCoins(int c){
+        // Warning : donnée liée avec coinsSpent
         this.coins-=c;
         this.coinsSpent+=c;
     }
@@ -33,5 +34,8 @@ public class User {
     }
     public void incGamesPlayed(){
         this.gamesPlayed++;
+    }
+    public void incGamesWon(){
+        this.gamesWon++;
     }
 }

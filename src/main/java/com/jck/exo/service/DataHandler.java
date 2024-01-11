@@ -75,4 +75,11 @@ public class DataHandler {
                 .getAsJsonObject(userName), User.class);
 
     }
+
+    public static int getGainByString(String symbol){
+        return instance.data
+                .getAsJsonObject("configGains")
+                .getAsJsonPrimitive(symbol)
+                .getAsInt();
+    }
 }
