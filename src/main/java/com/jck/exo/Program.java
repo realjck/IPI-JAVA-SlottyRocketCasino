@@ -14,7 +14,7 @@ public class Program {
         // charge config
         DataHandler.getInstance();
         DataHandler.load("data.json");
-        out.println(Arrays.deepToString(DataHandler.getConfig()));
+        out.println(Arrays.deepToString(DataHandler.getConfigSlots()));
 
         // lance machine
         try {

@@ -40,8 +40,8 @@ public class DataHandler {
      * Get Config
      * @return String[][] configuration of machine slots
      */
-    public static String[][] getConfig(){
-        JsonArray configArray = instance.data.getAsJsonArray("config");
+    public static String[][] getConfigSlots(){
+        JsonArray configArray = instance.data.getAsJsonArray("configSlots");
         int rows = configArray.size();
         int cols = configArray.get(0).getAsJsonArray().size();
 
