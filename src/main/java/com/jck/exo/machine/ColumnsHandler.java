@@ -1,8 +1,6 @@
 package com.jck.exo.machine;
 
 import com.jck.exo.service.DataHandler;
-
-import java.util.Date;
 import java.util.Random;
 
 public class ColumnsHandler {
@@ -10,7 +8,11 @@ public class ColumnsHandler {
     private String[][] slots;
 
     public ColumnsHandler() throws SlotMachineException {
-        this.slots = DataHandler.getConfigSlots();
+        try {
+            this.slots = DataHandler.getConfigSlots();
+        } catch (Exception e){
+            throw new SlotMachineException("Erreur à l'initialisation des données");
+        }
         this.random = new Random();
     }
 
