@@ -7,11 +7,14 @@
 #[ BAR ]=[ (7) ]=[ ~T~ ]#
 #[ ~C~ ]=[ BAR ]=[ (7) ]#
 #[ ~T~ ]=[ ~C~ ]=[ BAR ]#
-@*******@*******@*******@
+@*******@\*****/@*******@
+# C:123456          #12 @
+@***********************@
+
 
 # colors
-# -Red, Green, Yellow, Blue, Purple, Cyan
-# -White:`_`
+# -Red, Green, Yellow, Blue, Purple, Cyan, White
+# -Default(grey) : `_`
 
 GBBBBBBBGBPBBBPBGBBBBBBBG
 _Y_C_G_Y_C_G_Y_C_G_Y_C_G_
@@ -19,4 +22,6 @@ GBBBBBBGPBBBBBBBPGBBBBBBG
 PY_WWW_YBY_WWW_YBY_WWW_YP
 PY_WWW_YBY_WWW_YBY_WWW_YP
 PY_WWW_YBY_WWW_YBY_WWW_YP
-GBBBBBBBGBBBBBBBGBBBBBBBG
+GBBBBBBBGPBBBBBPGBBBBBBBG
+P_Y_WWWWWWWWWWWWWWWWWWW_P
+GBBBBBBBBBBBBBBBBBBBBBBBG

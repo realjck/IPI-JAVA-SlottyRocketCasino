@@ -9,6 +9,7 @@ public class Prompt {
 
     /**
      * Renvoie la valeur de la touche pressée au clavier
+     * (pour l'instant avec appui sur Return, à voir pour appui simple)
      * @param message message du prompt
      * @return String
      */

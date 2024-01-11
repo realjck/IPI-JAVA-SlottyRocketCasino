@@ -1,7 +1,10 @@
 package com.jck.exo.view;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Scanner;
 
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class SlotMachineView {
@@ -32,7 +35,7 @@ public class SlotMachineView {
                             + formatCell(matrix[2][i]) + " ]#",
                     "PY_WWW_YBY_WWW_YBY_WWW_YP");
         }
-        printLine("@*******@*******@*******@", "GBBBBBBBGBBBBBBBGBBBBBBBG");
+        printLine("@*******@\\*****/@*******@", "GBBBBBBBGPBBBBBPGBBBBBBBG");
     }
     private void printLine(String text, String colors){
         int counter = 0;
@@ -65,5 +68,21 @@ public class SlotMachineView {
         } else {
             return cell;
         }
+    }
+
+    /**
+     * SHOW MACHINE FOOTER
+     * @param coins nombre de jetons
+     * @param nbplay numéro de partie
+     */
+    public void showMachineFooter(int coins, int nbplay){
+        StringBuilder infoLine = new StringBuilder("# C:");
+        infoLine.append(coins);
+        infoLine.append(" ".repeat(18
+                - String.valueOf(coins).length()
+                - String.valueOf(nbplay).length()));
+        infoLine.append("#").append(nbplay +1).append(" #");
+        printLine(infoLine.toString(), "P_Y_WWWWWWWWWWWWWWWWWWW_P");
+        printLine("@***********************@", "GBBBBBBBBBBBBBBBBBBBBBBBG");
     }
 }
