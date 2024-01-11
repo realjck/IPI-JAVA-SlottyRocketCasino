@@ -42,6 +42,7 @@ public class DataHandler {
      */
     public static String[][] getConfigSlots(){
         JsonArray configArray = instance.data.getAsJsonArray("configSlots");
+        // todo: code chatgpt à voir si pas mieux avec Gson:
         int rows = configArray.size();
         int cols = configArray.get(0).getAsJsonArray().size();
 

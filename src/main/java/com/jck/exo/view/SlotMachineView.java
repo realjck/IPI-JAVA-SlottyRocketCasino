@@ -22,6 +22,7 @@ public class SlotMachineView {
      * @param matrix 3x3 String matrix
      */
     public void showMachine(String[][] matrix){
+        out.flush();
         printLine("@*******@*/***\\*@*******@", "GBBBBBBBGBPBBBPBGBBBBBBBG");
         printLine("~S L O T T Y R O C K E T~", "_Y_C_G_Y_C_G_Y_C_G_Y_C_G_");
         printLine("@======@/*=====*\\@======@", "GBBBBBBGPBBBBBBBPGBBBBBBG");
@@ -64,10 +65,5 @@ public class SlotMachineView {
         } else {
             return cell;
         }
-    }
-    public char getCharInput(String message){
-        Scanner scanner = new Scanner(System.in);
-        out.print(YELLOW + message);
-        return scanner.next().charAt(0);
     }
 }

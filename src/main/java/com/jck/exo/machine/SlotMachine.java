@@ -1,6 +1,7 @@
 package com.jck.exo.machine;
 
 import com.jck.exo.service.DataHandler;
+import com.jck.exo.service.Prompt;
 import com.jck.exo.view.SlotMachineView;
 
 public class SlotMachine {
@@ -16,8 +17,11 @@ public class SlotMachine {
     }
 
     private void launchGame(){
-
         view.showMachine(DataHandler.getConfigSlots());
-        char input = view.getCharInput("Combien de jetons -3,2,1- Q:quitter ?");
+        String input = "";
+        while(!input.equalsIgnoreCase("q")){
+            input = Prompt.getKey("Combien de jetons -3,2,1- Q:quitter ?");
+        }
+
     }
 }
