@@ -13,6 +13,7 @@ public class SlotMachineView {
     private static final String DEFAULT = "\u001B[37m";
 
     public SlotMachineView() {
+        // rien ici
     }
 
     /**
@@ -80,7 +81,7 @@ public class SlotMachineView {
         infoLine.append(coins);
         infoLine.append(" ".repeat(18
                 - String.valueOf(coins).length()
-                - String.valueOf(nbplay).length()));
+                - String.valueOf(nbplay +1).length()));
         infoLine.append("#").append(nbplay +1).append(" #");
         printLine(infoLine.toString(), "P_Y_WWWWWWWWWWWWWWWWWWW_P");
         printLine("@***********************@", "GBBBBBBBBBBBBBBBBBBBBBBBG");

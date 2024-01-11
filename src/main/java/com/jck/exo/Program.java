@@ -29,6 +29,7 @@ public class Program {
         // lance machine
         try {
             new SlotMachine(player);
+            DataHandler.save("data.json");
         } catch (SlotMachineException e){
             out.println(e.getMessage());
         }
