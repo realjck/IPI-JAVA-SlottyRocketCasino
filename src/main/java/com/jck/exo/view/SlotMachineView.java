@@ -20,7 +20,7 @@ public class SlotMachineView {
      * SHOW MACHINE
      * @param matrix 3x3 String matrix
      */
-    public void showMachine(String[][] matrix){
+    public void showMachine(String[][] matrix, boolean[][] matrixLum){
         out.flush();
         out.println();
         printLine("@*******@*/***\\*@*******@", "GBBBBBBBGBPBBBPBGBBBBBBBG");
@@ -30,7 +30,10 @@ public class SlotMachineView {
             printLine("#[ "+formatCell(matrix[0][i]) + " ]=[ "
                             + formatCell(matrix[1][i]) + " ]=[ "
                             + formatCell(matrix[2][i]) + " ]#",
-                    "PY_WWW_YBY_WWW_YBY_WWW_YP");
+                    "PY_" + (matrixLum[0][i] ? "WWW" : "___")
+                            + "_YBY_" + (matrixLum[1][i] ? "WWW" : "___")
+                            +"_YBY_" + (matrixLum[2][i] ? "WWW" : "___d")
+                            +"_YP");
         }
         printLine("@*******@\\*****/@*******@", "GBBBBBBBGPBBBBBPGBBBBBBBG");
     }
