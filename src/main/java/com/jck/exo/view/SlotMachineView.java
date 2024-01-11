@@ -26,6 +26,7 @@ public class SlotMachineView {
      */
     public void showMachine(String[][] matrix){
         out.flush();
+        out.println();
         printLine("@*******@*/***\\*@*******@", "GBBBBBBBGBPBBBPBGBBBBBBBG");
         printLine("~S L O T T Y R O C K E T~", "_Y_C_G_Y_C_G_Y_C_G_Y_C_G_");
         printLine("@======@/*=====*\\@======@", "GBBBBBBGPBBBBBBBPGBBBBBBG");

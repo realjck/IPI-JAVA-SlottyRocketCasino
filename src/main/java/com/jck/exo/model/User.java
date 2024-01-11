@@ -31,4 +31,7 @@ public class User {
     public int getGamesPlayed() {
         return gamesPlayed;
     }
+    public void incGamesPlayed(){
+        this.gamesPlayed++;
+    }
 }

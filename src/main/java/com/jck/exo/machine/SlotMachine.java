@@ -5,6 +5,8 @@ import com.jck.exo.service.DataHandler;
 import com.jck.exo.service.Prompt;
 import com.jck.exo.view.SlotMachineView;
 
+import java.util.Date;
+
 public class SlotMachine {
     private User user;
     private ColumnsHandler columnsHandler;
@@ -20,11 +22,33 @@ public class SlotMachine {
     }
 
     private void launchGame(){
-        view.showMachine(DataHandler.getConfigSlots());
-        view.showMachineFooter(user.getCoins(), user.getGamesPlayed());
+
+        String[][] matrix = DataHandler.getConfigSlots();
         String input = "";
-        while(!input.equalsIgnoreCase("q")){
-            input = Prompt.getKey("Combien de jetons voulez-vous miser ?\n-3,2,1- Q:sauvegarder et quitter ? > ");
+
+        // games
+        while (!input.equalsIgnoreCase("q")){
+
+            view.showMachine(matrix);
+            view.showMachineFooter(user.getCoins(), user.getGamesPlayed());
+
+
+            int coinsSpent = 0;
+            while(!input.equalsIgnoreCase("q") && (coinsSpent <1 || coinsSpent >33)){
+                input = Prompt.getKey("Combien de jetons voulez-vous miser ?\n-3,2,1- Q:sauvegarder et quitter ? > ");
+                try {
+                    coinsSpent = Integer.parseInt(input);
+                } catch (Exception ignored){}
+            }
+            user.removeCoins(coinsSpent);
+
+            // random matrix
+            if (coinsSpent > 0 ){
+
+                // trying to get a good random seed :
+                long seed = Long.parseLong(String.valueOf(new Date().hashCode()));
+                matrix = columnsHandler.getRandomMatrix(seed);
+            }
         }
 
     }
