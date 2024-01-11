@@ -1,0 +1,21 @@
+{
+  "config": [
+    ["7", "C", "BAR", "T", "P", "7", "C", "BAR", "T", "R", "7", "C", "BAR", "R", "P"],
+    ["7", "P", "C", "T", "R", "BAR", "C", "T", "R", "C", "BAR", "P", "T", "C", "R"],
+    ["7", "BAR", "T", "P", "C", "R", "T", "P", "C", "R", "T", "P", "C", "R", "T"]
+  ],
+  "saves": {
+    "pik" : {
+      "coins": 151,
+      "games_played": 24,
+      "games_won": 2,
+      "coins_spent": 30
+    },
+    "dev" : {
+      "coins": 1000,
+      "games_played": 0,
+      "games_won": 0,
+      "coins_spent": 0
+    }
+  }
+}
