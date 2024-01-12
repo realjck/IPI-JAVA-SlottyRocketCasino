@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import static java.lang.System.out;
 
+/**
+ * PROMPT
+ * Classe utilitaire pour la saisie en CLI
+ */
 public class Prompt {
     private static final String YELLOW = "\u001B[93m";
 

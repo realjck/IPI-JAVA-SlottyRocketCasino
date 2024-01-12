@@ -16,8 +16,8 @@ public class Program {
         DataHandler.load("data.json");
 
         // invite utilisateur
-        String userName = Prompt.getString("BONJOUR ET BIENVENUE AU CASINO, VEUILLEZ PRÉSENTER VOTRE IDENTITÉ > ");
         User player;
+        String userName = Prompt.getString("BONJOUR ET BIENVENUE AU CASINO, VEUILLEZ PRÉSENTER VOTRE IDENTITÉ > ");
         try {
             player = DataHandler.getUserByName(userName);
         } catch (Exception e){

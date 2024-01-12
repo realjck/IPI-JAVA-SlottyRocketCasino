@@ -14,8 +14,8 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 /**
- * DataHandler
- * to handle access to config and saves
+ * DATA HANDLER
+ * Gestion des données du jeu
  */
 public class DataHandler {
     private static DataHandler instance = null;
@@ -60,7 +60,6 @@ public class DataHandler {
 
     /**
      * Get Config
-     * (code ChatGPT à voir si pas mieux en utilisant Gson)
      * @return String[][] configuration of machine slots
      */
     public static String[][] getConfigSlots(){
@@ -99,6 +98,10 @@ public class DataHandler {
 
     }
 
+    /**
+     * Mets à jour (ou crée) User
+     * @param user User avec propriétés à jour
+     */
     public static void updateUser(User user){
         JsonObject save = new JsonObject();
         save.addProperty("coins", user.getCoins());

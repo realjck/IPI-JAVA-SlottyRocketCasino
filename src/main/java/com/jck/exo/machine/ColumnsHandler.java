@@ -17,7 +17,7 @@ public class ColumnsHandler {
     }
 
     /**
-     * This returns a 3x3 Random Matrix
+     * Renvoie la matrice 3x3 de la vue des slots
      * @param seed Long
      * @return String[][]
      */

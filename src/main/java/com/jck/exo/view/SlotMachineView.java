@@ -76,8 +76,8 @@ public class SlotMachineView {
 
     /**
      * SHOW MACHINE FOOTER
-     * @param coins nombre de jetons
-     * @param nbplay numéro de partie
+     * @param coins int nombre de jetons
+     * @param nbplay int numéro de partie
      */
     public void showMachineFooter(int coins, int nbplay){
         StringBuilder infoLine = new StringBuilder("# C:");
