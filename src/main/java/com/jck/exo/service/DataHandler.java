@@ -48,7 +48,7 @@ public class DataHandler {
      */
     public static synchronized void save(String filename) {
 
-        File file = new File("src/main/resources/" + filename); // Specify the path to the resources directory
+        File file = new File("src/main/resources/" + filename);
         Path path = file.toPath();
 
         try (FileWriter writer = new FileWriter(path.toFile())) {
