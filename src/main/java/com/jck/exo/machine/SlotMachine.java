@@ -45,7 +45,7 @@ public class SlotMachine {
             }
 
             int coinsSpent = 0;
-            while(!input.equalsIgnoreCase("q") && (coinsSpent <1 || coinsSpent >33)){
+            while(!input.equalsIgnoreCase("q") && (coinsSpent <1 || coinsSpent >3)){
                 input = Prompt.getKey("Combien de jetons voulez-vous miser ?\n-3,2,1- Q:sauvegarder et quitter ? > ");
                 try {
                     coinsSpent = Integer.parseInt(input);
