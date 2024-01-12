@@ -21,7 +21,7 @@ public class Program {
         TerminalDisplay.colorPrint("¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸",
                 "GPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPB");
         TerminalDisplay.colorPrint("BONJOUR ET BIENVENUE AU CASINO, VEUILLEZ PRÉSENTER VOTRE IDENTITÉ.", "Y");
-        TerminalDisplay.colorPrint("(Seul Testy peut accéder aux statistiques)", "WWWWWWCGCGCW");
+        TerminalDisplay.colorPrint("(Seul Testy peut accéder aux statistiques)", "______CGCGC_");
         String userName = Prompt.getString(" > ").toLowerCase();
 
         if (!userName.equals("testy")) {
@@ -36,13 +36,38 @@ public class Program {
 
             // lance machine
             try {
-                new SlotMachine(player);
+                SlotMachine slotMachine = new SlotMachine(player);
+                slotMachine.launchGame();
+                // plays...
                 DataHandler.save("data.json");
+                // quit
             } catch (SlotMachineException e) {
                 out.println(e.getMessage());
             }
         } else {
             // mode statistiques
+            try {
+                User playerTest = new User(userName);
+                playerTest.addCoins(1000);
+                SlotMachine slotMachineStat = new SlotMachine(playerTest);
+                //SlotMachine slotMachineStat = new SlotMachine(new User(userName));
+                int nbTest = 0;
+                while (nbTest < 1){
+                    try {
+                        TerminalDisplay.colorPrint("Bonjour Testy, Combien voulez-vous lancer de tests aujourd'hui ?",
+                                                  "YYYYYYYYGCGCGY");
+                        nbTest = Integer.parseInt(Prompt.getString(" > "));
+                    } catch (Exception ignored){}
+                }
+                TerminalDisplay.colorPrint("Tests en cours, veuillez patienter...", "P");
+                for (int i=0; i<nbTest ; i++){
+                    slotMachineStat.launchGame(true);
+                }
+                TerminalDisplay.colorPrint("Voici vos résultats :", "Y");
+                DataHandler.getUserByName(userName);
+            } catch (SlotMachineException e){
+                out.println(e.getMessage());
+            }
 
         }
     }

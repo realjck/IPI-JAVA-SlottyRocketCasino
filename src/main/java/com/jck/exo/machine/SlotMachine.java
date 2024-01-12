@@ -28,11 +28,17 @@ public class SlotMachine {
 
         DataHandler.getInstance();
         this.view = new SlotMachineView();
-
-        launchGame();
     }
 
-    private void launchGame(){
+    /**
+     * Lance une partie
+     */
+    public void launchGame() {launchGame(false);}
+
+    /**
+     * @param test bool True pour faire un test (ignorer affichage et jouer 3 jetons)
+     */
+    public void launchGame(boolean test){
 
         matrix = new String[][]{
                 {"---", "---", "---"},
@@ -40,29 +46,35 @@ public class SlotMachine {
                 {"---", "---", "---"}
         };
         matrixLum = new boolean[3][3];
-        String input = "";
+        String input = (test ? "q" : "");
 
         // games
         int lastWon = 0;
-        while (!input.equalsIgnoreCase("q")){
+        do {
+            int coinsSpent;
+            if (!test) {
+                view.showMachine(matrix, matrixLum);
+                view.showMachineFooter(user.getCoins(), user.getGamesPlayed());
+                if (lastWon > 0) {
+                    view.showWon(lastWon);
+                }
 
-            view.showMachine(matrix, matrixLum);
-            view.showMachineFooter(user.getCoins(), user.getGamesPlayed());
-            if (lastWon > 0){
-                view.showWon(lastWon);
+                coinsSpent = 0;
+                while (!input.equalsIgnoreCase("q") && (coinsSpent < 1 || coinsSpent > 3)) {
+                    input = Prompt.getKey("Combien de jetons voulez-vous miser ?\n-3,2,1- Q:sauvegarder et quitter ? > ");
+                    try {
+                        coinsSpent = Integer.parseInt(input);
+                    } catch (Exception ignored) {
+                    }
+                }
+            } else {
+                coinsSpent = 3;
             }
 
-            int coinsSpent = 0;
-            while(!input.equalsIgnoreCase("q") && (coinsSpent <1 || coinsSpent >3)){
-                input = Prompt.getKey("Combien de jetons voulez-vous miser ?\n-3,2,1- Q:sauvegarder et quitter ? > ");
-                try {
-                    coinsSpent = Integer.parseInt(input);
-                } catch (Exception ignored){}
-            }
             user.removeCoins(coinsSpent);
 
             // random matrix
-            if (coinsSpent > 0 ){
+            if (coinsSpent > 0){
                 // random seed by date :
                 long seed = Long.parseLong(String.valueOf(new Date().hashCode()));
                 matrix = columnsHandler.getRandomMatrix(seed);
@@ -88,7 +100,7 @@ public class SlotMachine {
                 }
                 user.incGamesPlayed();
             }
-        }
+        } while (!input.equalsIgnoreCase("q"));
     }
 
     /**
