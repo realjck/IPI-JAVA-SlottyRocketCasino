@@ -1,10 +1,12 @@
 package com.jck.exo;
 
+import com.google.gson.JsonObject;
 import com.jck.exo.machine.SlotMachine;
 import com.jck.exo.machine.SlotMachineException;
 import com.jck.exo.model.User;
 import com.jck.exo.service.DataHandler;
 import com.jck.exo.service.Prompt;
+import com.jck.exo.view.SlotMachineView;
 import com.jck.exo.view.TerminalDisplay;
 
 import static java.lang.System.out;
@@ -38,37 +40,55 @@ public class Program {
             try {
                 SlotMachine slotMachine = new SlotMachine(player);
                 slotMachine.launchGame();
-                // plays...
-                DataHandler.save("data.json");
-                // quit
+                // plays... then quit the program
             } catch (SlotMachineException e) {
                 out.println(e.getMessage());
             }
         } else {
-            // mode statistiques
+            // mode statistique
             try {
                 User playerTest = new User(userName);
-                playerTest.addCoins(1000);
                 SlotMachine slotMachineStat = new SlotMachine(playerTest);
-                //SlotMachine slotMachineStat = new SlotMachine(new User(userName));
                 int nbTest = 0;
                 while (nbTest < 1){
                     try {
-                        TerminalDisplay.colorPrint("Bonjour Testy, Combien voulez-vous lancer de tests aujourd'hui ?",
-                                                  "YYYYYYYYGCGCGY");
-                        nbTest = Integer.parseInt(Prompt.getString(" > "));
+                        nbTest = Integer.parseInt(Prompt.getString("Combien voulez-vous lancer de tests aujourd'hui ? > "));
                     } catch (Exception ignored){}
                 }
                 TerminalDisplay.colorPrint("Tests en cours, veuillez patienter...", "P");
                 for (int i=0; i<nbTest ; i++){
                     slotMachineStat.launchGame(true);
                 }
-                TerminalDisplay.colorPrint("Voici vos résultats :", "Y");
-                DataHandler.getUserByName(userName);
+                TerminalDisplay.colorPrint("Voici vos Résultats :", "G");
+                TerminalDisplay.colorPrint("* COINS:"+playerTest.getCoins(), "P_YYYYY_W");
+                TerminalDisplay.colorPrint("* GAMES WON:"+playerTest.getGamesWon(), "P_YYYYYYYYY_W");
+                TerminalDisplay.colorPrint("* COINS SPENT:"+playerTest.getCoinsSpent(), "P_YYYYYYYYYYY_W");
+
+                String[] symbols = {"7","BAR","R","P","T","C"};
+                int total = 0;
+                JsonObject winCounter = DataHandler.getWinCounter();
+                for (String s : symbols){
+                    total += winCounter.getAsJsonPrimitive(s).getAsInt();
+                }
+                if (total > 0){
+                    TerminalDisplay.colorPrint("% des Tirages gagnants (sauvegardés) :", "B");
+                    for (String s : symbols){
+                        TerminalDisplay.colorPrint(
+                                "* " + new SlotMachineView().formatCell(s)+":"
+                                        + (Math.round(winCounter.getAsJsonPrimitive(s).getAsDouble() / total * 100) + "%"),
+                                "P BBB_W");
+                    }
+                }
+
+                TerminalDisplay.colorPrint("Au revoir Testy!", "__________CGCGCP");
+                DataHandler.removeUser(playerTest);
+
             } catch (SlotMachineException e){
                 out.println(e.getMessage());
             }
-
         }
+        // save
+        DataHandler.save("data.json");
+        // quit
     }
 }

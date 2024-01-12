@@ -30,7 +30,13 @@ public class SlotMachineView {
         }
         TerminalDisplay.colorPrint("@*******@\\*****/@*******@", "GBBBBBBBGPBBBBBPGBBBBBBBG");
     }
-    private String formatCell(String cell){
+
+    /**
+     * Formate une cellule ( ) pour un chiffre, ~ ~ pour une lettre
+     * @param cell String
+     * @return String
+     */
+    public String formatCell(String cell){
         if (cell.length()==1){
             try{
                 Integer.parseInt(cell);

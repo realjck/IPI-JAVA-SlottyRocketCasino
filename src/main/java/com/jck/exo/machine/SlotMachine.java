@@ -106,7 +106,8 @@ public class SlotMachine {
     /**
      * Vérifie une ligne (3 cases)
      * allume les lumières dans matrixLum
-     * et renvoie les gains
+     * renvoie les gains
+     * et incrémente le winCounter de data
      * @param c1 int[] case 1 x,y
      * @param c2 int[] case 2 x,y
      * @param c3 int[] case 3 x,y
@@ -117,7 +118,9 @@ public class SlotMachine {
                 && Objects.equals(matrix[c2[0]][c2[1]], matrix[c3[0]][c3[1]])){
 
             matrixLum[c1[0]][c1[1]] = matrixLum[c2[0]][c2[1]] = matrixLum[c3[0]][c3[1]] = true;
-            return DataHandler.getGainByString(matrix[c1[0]][c1[1]]);
+            String str = matrix[c1[0]][c1[1]];
+            DataHandler.incWinCounter(str);
+            return DataHandler.getGainByString(str);
 
         } else {
             return 0;
