@@ -1,17 +1,10 @@
 package com.jck.exo.view;
 
+import com.jck.exo.service.Prompt;
+
 import static java.lang.System.out;
 
 public class SlotMachineView {
-    private static final String RED = "\u001B[91m";
-    private static final String GREEN = "\u001B[92m";
-    private static final String YELLOW = "\u001B[93m";
-    private static final String BLUE = "\u001B[94m";
-    private static final String PURPLE = "\u001B[95m";
-    private static final String CYAN = "\u001B[96m";
-    private static final String WHITE = "\u001B[97m";
-    private static final String DEFAULT = "\u001B[37m";
-
     public SlotMachineView() {
         // rien ici
     }
@@ -23,11 +16,11 @@ public class SlotMachineView {
     public void showMachine(String[][] matrix, boolean[][] matrixLum){
         out.flush();
         out.println();
-        printLine("@*******@*/***\\*@*******@", "GBBBBBBBGBPBBBPBGBBBBBBBG");
-        printLine("~S L O T T Y R O C K E T~", "_Y_C_G_Y_C_G_Y_C_G_Y_C_G_");
-        printLine("@======@/*=====*\\@======@", "GBBBBBBGPBBBBBBBPGBBBBBBG");
+        TerminalDisplay.colorPrint("@*******@*/***\\*@*******@", "GBBBBBBBGBPBBBPBGBBBBBBBG");
+        TerminalDisplay.colorPrint("~S L O T T Y R O C K E T~", "_Y_C_G_Y_C_G_Y_C_G_Y_C_G_");
+        TerminalDisplay.colorPrint("@======@/*=====*\\@======@", "GBBBBBBGPBBBBBBBPGBBBBBBG");
         for (int i=0; i<3; i++){
-            printLine("#[ "+formatCell(matrix[0][i]) + " ]=[ "
+            TerminalDisplay.colorPrint("#[ "+formatCell(matrix[0][i]) + " ]=[ "
                             + formatCell(matrix[1][i]) + " ]=[ "
                             + formatCell(matrix[2][i]) + " ]#",
                     "PY_" + (matrixLum[0][i] ? "WWW" : "___")
@@ -35,31 +28,7 @@ public class SlotMachineView {
                             +"_YBY_" + (matrixLum[2][i] ? "WWW" : "___")
                             +"_YP");
         }
-        printLine("@*******@\\*****/@*******@", "GBBBBBBBGPBBBBBPGBBBBBBBG");
-    }
-    private void printLine(String text, String colors){
-        int counter = 0;
-        StringBuilder lineStr = new StringBuilder();
-        char color = 'W';
-        for(char c : text.toCharArray()){
-            try {
-                color = colors.toUpperCase().charAt(counter);
-            } catch (Exception ignored){}
-
-            switch (color){
-                case 'R' : lineStr.append(RED); break;
-                case 'G' : lineStr.append(GREEN); break;
-                case 'Y' : lineStr.append(YELLOW); break;
-                case 'B' : lineStr.append(BLUE); break;
-                case 'P' : lineStr.append(PURPLE); break;
-                case 'C' : lineStr.append(CYAN); break;
-                case 'W' : lineStr.append(WHITE); break;
-                default : lineStr.append(DEFAULT); break;
-            }
-            lineStr.append(c);
-            counter++;
-        }
-        out.println(lineStr);
+        TerminalDisplay.colorPrint("@*******@\\*****/@*******@", "GBBBBBBBGPBBBBBPGBBBBBBBG");
     }
     private String formatCell(String cell){
         if (cell.length()==1){
@@ -77,24 +46,25 @@ public class SlotMachineView {
     /**
      * SHOW MACHINE FOOTER
      * @param coins int nombre de jetons
-     * @param nbplay int numéro de partie
+     * @param nbPlay int numéro de partie
      */
-    public void showMachineFooter(int coins, int nbplay){
+    public void showMachineFooter(int coins, int nbPlay){
         StringBuilder infoLine = new StringBuilder("# C:");
         infoLine.append(coins);
         infoLine.append(" ".repeat(18
                 - String.valueOf(coins).length()
-                - String.valueOf(nbplay +1).length()));
-        infoLine.append("#").append(nbplay +1).append(" #");
-        printLine(infoLine.toString(), "P_Y_WWWWWWWWWWWWWWWWWWW_P");
-        printLine("@***********************@", "GBBBBBBBBBBBBBBBBBBBBBBBG");
+                - String.valueOf(nbPlay +1).length()));
+        infoLine.append("#").append(nbPlay +1).append(" #");
+        TerminalDisplay.colorPrint(infoLine.toString(), "P_Y_WWWWWWWWWWWWWWWWWWW_P");
+        TerminalDisplay.colorPrint("@***********************@", "GBBBBBBBBBBBBBBBBBBBBBBBG");
     }
 
     /**
+     * SHOW WON
      * Affiche les gains du dernier tirage
      * @param gains int gains à afficher
      */
     public void showWon(int gains){
-        printLine("VOUS AVEZ GAGNE C:"+gains, "CGCGCGCGCGCGCGCGY_W");
+        TerminalDisplay.colorPrint("VOUS AVEZ GAGNE C:"+gains, "CGCGCGCGCGCGCGCGY_W");
     }
 }
