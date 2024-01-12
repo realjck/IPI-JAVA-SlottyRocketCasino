@@ -14,6 +14,14 @@ public class SlotMachine {
     private SlotMachineView view;
     private String[][] matrix;
     private boolean[][] matrixLum;
+
+    /**
+     * Instancie une machine
+     * l'attribue à un joueur
+     * et lance le jeu
+     * @param user User
+     * @throws SlotMachineException erreur à l'initialisation
+     */
     public SlotMachine(User user) throws SlotMachineException {
         this.user = user;
         this.columnsHandler = new ColumnsHandler();

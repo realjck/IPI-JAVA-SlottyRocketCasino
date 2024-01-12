@@ -17,7 +17,7 @@ public class ColumnsHandler {
     }
 
     /**
-     * This returns a 3x3 Random Matrix ♥ of game
+     * This returns a 3x3 Random Matrix
      * @param seed Long
      * @return String[][]
      */
@@ -27,7 +27,6 @@ public class ColumnsHandler {
         for (int col=0; col<3 ; col++){
             int index = random.nextInt(slots[col].length);
             for (int i=0; i<3; i++){
-                // modulo use
                 matrix[col][i] = slots[col][(i + index) % slots[col].length];
             }
         }
