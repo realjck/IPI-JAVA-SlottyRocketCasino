@@ -59,8 +59,8 @@ public class DataHandler {
     }
 
     /**
-     * Get Config
-     * @return String[][] configuration of machine slots
+     * Renvoie la configuration de la machine (3 colonnes)
+     * @return String[][]
      */
     public static String[][] getConfigSlots(){
         JsonArray configArray = instance.data.getAsJsonArray("configSlots");
@@ -84,10 +84,6 @@ public class DataHandler {
      * @return User joueur recherché
      */
     public static User getUserByName(String userName) {
-        // pour debug:
-        System.out.println(instance.data.getAsJsonObject("saves")
-                .getAsJsonObject(userName).toString());
-
         User user = new Gson().fromJson(instance.data
                 .getAsJsonObject("saves")
                 .getAsJsonObject(userName), User.class);
@@ -95,7 +91,14 @@ public class DataHandler {
         user.setName(userName);
 
         return user;
+    }
 
+    /**
+     * Efface un joueur de l'objet data saves
+     * @param user User
+     */
+    public static void removeUser(User user){
+        instance.data.getAsJsonObject("saves").remove(user.getName());
     }
 
     /**
@@ -113,7 +116,7 @@ public class DataHandler {
     }
 
     /**
-     * Renvoie les gains associés depuis la config gains de data.json
+     * Renvoie les gains associés depuis la config gains de data
      * @param symbol String symbole gagné
      * @return int gains
      */
@@ -122,5 +125,26 @@ public class DataHandler {
                 .getAsJsonObject("configGains")
                 .getAsJsonPrimitive(symbol)
                 .getAsInt();
+    }
+
+    /**
+     * Incrémente le winCounter correspondant de data
+     * @param symbol String
+     */
+    public static void incWinCounter(String symbol){
+        instance.data.getAsJsonObject("winCounter").addProperty(
+                symbol,
+                instance.data.getAsJsonObject("winCounter")
+                        .getAsJsonPrimitive(symbol)
+                        .getAsInt() +1
+        );
+    }
+
+    /**
+     * Récupère les statistiques des symboles sous forme d'un Json
+     * @return JsonObject {"symbol": count}
+     */
+    public static JsonObject getWinCounter(){
+        return instance.data.getAsJsonObject("winCounter");
     }
 }

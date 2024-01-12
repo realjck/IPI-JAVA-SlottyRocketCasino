@@ -9,6 +9,7 @@ import static java.lang.System.out;
  * Classe utilitaire pour la saisie en CLI
  */
 public class Prompt {
+    private Prompt(){}
     private static final String YELLOW = "\u001B[93m";
 
     /**
@@ -33,4 +34,5 @@ public class Prompt {
         out.print(YELLOW + message);
         return scanner.next();
     }
+
 }

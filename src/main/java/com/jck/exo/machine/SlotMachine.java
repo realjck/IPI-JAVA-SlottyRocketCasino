@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.Objects;
 
 public class SlotMachine {
-    private User user;
-    private ColumnsHandler columnsHandler;
-    private SlotMachineView view;
+    private final User user;
+    private final ColumnsHandler columnsHandler;
+    private final SlotMachineView view;
     private String[][] matrix;
     private boolean[][] matrixLum;
 
@@ -28,11 +28,17 @@ public class SlotMachine {
 
         DataHandler.getInstance();
         this.view = new SlotMachineView();
-
-        launchGame();
     }
 
-    private void launchGame(){
+    /**
+     * Lance une partie
+     */
+    public void launchGame() {launchGame(false);}
+
+    /**
+     * @param test bool True pour faire un test (ignorer affichage et jouer 3 jetons)
+     */
+    public void launchGame(boolean test){
 
         matrix = new String[][]{
                 {"---", "---", "---"},
@@ -40,29 +46,35 @@ public class SlotMachine {
                 {"---", "---", "---"}
         };
         matrixLum = new boolean[3][3];
-        String input = "";
+        String input = (test ? "q" : "");
 
         // games
         int lastWon = 0;
-        while (!input.equalsIgnoreCase("q")){
+        do {
+            int coinsSpent;
+            if (!test) {
+                view.showMachine(matrix, matrixLum);
+                view.showMachineFooter(user.getCoins(), user.getGamesPlayed());
+                if (lastWon > 0) {
+                    view.showWon(lastWon);
+                }
 
-            view.showMachine(matrix, matrixLum);
-            view.showMachineFooter(user.getCoins(), user.getGamesPlayed());
-            if (lastWon > 0){
-                view.showWon(lastWon);
+                coinsSpent = 0;
+                while (!input.equalsIgnoreCase("q") && (coinsSpent < 1 || coinsSpent > 3)) {
+                    input = Prompt.getKey("Combien de jetons voulez-vous miser ?\n-3,2,1- Q:sauvegarder et quitter ? > ");
+                    try {
+                        coinsSpent = Integer.parseInt(input);
+                    } catch (Exception ignored) {
+                    }
+                }
+            } else {
+                coinsSpent = 3;
             }
 
-            int coinsSpent = 0;
-            while(!input.equalsIgnoreCase("q") && (coinsSpent <1 || coinsSpent >3)){
-                input = Prompt.getKey("Combien de jetons voulez-vous miser ?\n-3,2,1- Q:sauvegarder et quitter ? > ");
-                try {
-                    coinsSpent = Integer.parseInt(input);
-                } catch (Exception ignored){}
-            }
             user.removeCoins(coinsSpent);
 
             // random matrix
-            if (coinsSpent > 0 ){
+            if (coinsSpent > 0){
                 // random seed by date :
                 long seed = Long.parseLong(String.valueOf(new Date().hashCode()));
                 matrix = columnsHandler.getRandomMatrix(seed);
@@ -88,13 +100,14 @@ public class SlotMachine {
                 }
                 user.incGamesPlayed();
             }
-        }
+        } while (!input.equalsIgnoreCase("q"));
     }
 
     /**
      * Vérifie une ligne (3 cases)
      * allume les lumières dans matrixLum
-     * et renvoie les gains
+     * renvoie les gains
+     * et incrémente le winCounter de data
      * @param c1 int[] case 1 x,y
      * @param c2 int[] case 2 x,y
      * @param c3 int[] case 3 x,y
@@ -105,7 +118,9 @@ public class SlotMachine {
                 && Objects.equals(matrix[c2[0]][c2[1]], matrix[c3[0]][c3[1]])){
 
             matrixLum[c1[0]][c1[1]] = matrixLum[c2[0]][c2[1]] = matrixLum[c3[0]][c3[1]] = true;
-            return DataHandler.getGainByString(matrix[c1[0]][c1[1]]);
+            String str = matrix[c1[0]][c1[1]];
+            DataHandler.incWinCounter(str);
+            return DataHandler.getGainByString(str);
 
         } else {
             return 0;
