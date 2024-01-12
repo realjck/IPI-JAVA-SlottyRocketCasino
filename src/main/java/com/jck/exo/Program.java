@@ -52,7 +52,7 @@ public class Program {
                 int nbTest = 0;
                 while (nbTest < 1){
                     try {
-                        nbTest = Integer.parseInt(Prompt.getString("Combien voulez-vous lancer de tests aujourd'hui ? > "));
+                        nbTest = Integer.parseInt(Prompt.getString("Bonjour Testy! Combien voulez-vous lancer de tests aujourd'hui ? > "));
                     } catch (Exception ignored){}
                 }
                 TerminalDisplay.colorPrint("Tests en cours, veuillez patienter...", "P");
@@ -80,7 +80,7 @@ public class Program {
                     }
                 }
 
-                TerminalDisplay.colorPrint("Au revoir Testy!", "__________CGCGCP");
+                TerminalDisplay.colorPrint("Au revoir Testy!", "YYYYYYYYYYCGCGCP");
                 DataHandler.removeUser(playerTest);
 
             } catch (SlotMachineException e){
@@ -89,6 +89,8 @@ public class Program {
         }
         // save
         DataHandler.save("data.json");
+        TerminalDisplay.colorPrint("¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸",
+                "GPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPBGPB");
         // quit
     }
 }
