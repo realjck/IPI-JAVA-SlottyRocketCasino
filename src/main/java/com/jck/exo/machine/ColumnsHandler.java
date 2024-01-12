@@ -4,8 +4,8 @@ import com.jck.exo.service.DataHandler;
 import java.util.Random;
 
 public class ColumnsHandler {
-    private Random random;
-    private String[][] slots;
+    private final Random random;
+    private final String[][] slots;
 
     public ColumnsHandler() throws SlotMachineException {
         try {

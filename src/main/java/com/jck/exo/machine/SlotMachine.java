@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.Objects;
 
 public class SlotMachine {
-    private User user;
-    private ColumnsHandler columnsHandler;
-    private SlotMachineView view;
+    private final User user;
+    private final ColumnsHandler columnsHandler;
+    private final SlotMachineView view;
     private String[][] matrix;
     private boolean[][] matrixLum;
 

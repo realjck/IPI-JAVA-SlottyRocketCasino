@@ -84,10 +84,6 @@ public class DataHandler {
      * @return User joueur recherché
      */
     public static User getUserByName(String userName) {
-        // pour debug:
-        System.out.println(instance.data.getAsJsonObject("saves")
-                .getAsJsonObject(userName).toString());
-
         User user = new Gson().fromJson(instance.data
                 .getAsJsonObject("saves")
                 .getAsJsonObject(userName), User.class);

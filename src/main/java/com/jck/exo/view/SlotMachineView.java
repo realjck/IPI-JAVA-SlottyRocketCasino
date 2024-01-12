@@ -1,7 +1,5 @@
 package com.jck.exo.view;
 
-import com.jck.exo.service.Prompt;
-
 import static java.lang.System.out;
 
 public class SlotMachineView {
