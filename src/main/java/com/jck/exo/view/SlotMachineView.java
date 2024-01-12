@@ -32,7 +32,7 @@ public class SlotMachineView {
                             + formatCell(matrix[2][i]) + " ]#",
                     "PY_" + (matrixLum[0][i] ? "WWW" : "___")
                             + "_YBY_" + (matrixLum[1][i] ? "WWW" : "___")
-                            +"_YBY_" + (matrixLum[2][i] ? "WWW" : "___d")
+                            +"_YBY_" + (matrixLum[2][i] ? "WWW" : "___")
                             +"_YP");
         }
         printLine("@*******@\\*****/@*******@", "GBBBBBBBGPBBBBBPGBBBBBBBG");
